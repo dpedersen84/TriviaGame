@@ -1,4 +1,15 @@
-//start button
+$(document).ready(function() {
+
+
+    //start button
+    var startButton = $("<button>");
+    startButton.addClass("button button-color")
+    startButton.text("START");
+    $("#main").append(startButton);
+
+    $(startButton).on("click", function () {
+    console.log("I WORK");
+    });
 
 //1 question at a time 
     //30 second timer per question
@@ -11,3 +22,6 @@
     //correct / incorrect total
     //new game button
         //no need to refresh page
+
+
+})//END

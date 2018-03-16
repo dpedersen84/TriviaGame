@@ -1,0 +1,21 @@
+body {
+    background-image: url("../images/background1.jpg");
+    background-size: cover;
+}
+
+.button-color {
+    /* background-color: black; */
+    color:orange;
+}
+
+.button {
+    height: 50px;
+    width: 400px;
+    font-size: 35px;
+}
+
+/* .jumbotron {
+    background-image: url("../images/terminator-2-3D.jpg");
+    background-size: cover;
+    color: white;
+} */
