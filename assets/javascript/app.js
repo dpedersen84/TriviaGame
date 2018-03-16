@@ -11,6 +11,7 @@ $(document).ready(function() {
     console.log("I WORK");
     });
 
+    //Questions
     var questionOne = {
         question: "What year was Terminator 2: Judgment Day released in theaters?",
         answers: [1993, 1995, 1989, 1991],
@@ -29,23 +30,23 @@ $(document).ready(function() {
         correctAnswer: "John Connor",
     }
 
-    // var questionFour = {
-    //     question: ,
-    //     answers: ,
-    //     correctAnswer: ,
-    // }
+    var questionFour = {
+        question: "What model is Arnold Schwarzenegger's Terminator?",
+        answers: ["T-1000", "T-800", "T-20", "T-809"],
+        correctAnswer: "T-800",
+    }
 
-    // var questionFive = {
-    //     question: ,
-    //     answers: ,
-    //     correctAnswer: ,
-    // }
+    var questionFive = {
+        question: "The Artificial Intelligence that holds control of the United States' nuclear arsenal is called?",
+        answers: ["Skynet", "Cyberdyne Systems", "Dyson", "CGI"],
+        correctAnswer: "Skynet",
+    }
 
-    // var questionSix = {
-    //     question: ,
-    //     answers: ,
-    //     correctAnswer: ,
-    // }
+    var questionSix = {
+        question: "Arnold Schwarzenegger won which Award at the 1992 MTV Movie Awards?",
+        answers: ["Best Villain", "Best Breakthrough Performance", "Best Male Performance", "Best Female Performance"],
+        correctAnswer: "Best Male Performance",
+    }
 
 //1 question at a time
     //30 second timer per question
