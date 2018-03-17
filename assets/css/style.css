@@ -1,11 +1,11 @@
-body {
+/* body {
     background-image: url("../images/background1.jpg");
     background-size: cover;
-}
+} */
 
 .button-color {
     /* background-color: black; */
-    color:orange;
+    /* color:orange; */
 }
 
 .button {
