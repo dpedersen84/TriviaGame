@@ -9,10 +9,17 @@ $(document).ready(function() {
 
     //Click Function for Start Button
     $(startButton).on("click", function () {
-    console.log("I WORK");
     $(startButton).remove();
     game.loadQuestion();
     });
+
+    $(document).on("click", ".answer-button", function (event) {
+        game.clicked(event);
+    })
+
+    $(document).on("click", "#newGame", function () {
+        game.newGame ();
+    })
 
     //Questions Object
     var questionObject = [
@@ -61,6 +68,7 @@ $(document).ready(function() {
         counter: 30,
         correct: 0,
         incorrect: 0,
+        unanswered: 0,
 
         //Timer
         timer: function () {
@@ -76,10 +84,13 @@ $(document).ready(function() {
         loadQuestion: function () {
             timer = setInterval(game.timer,1000);
             $("#main").html('<h2>'+questionObject[game.currentQuestion].question+'</h2>');
-            for(var i = 0; i < questionObject[game.currentQuestion].answers.length; i++){
+            
+            for(var i = 0; i < questionObject[game.currentQuestion].answers.length; i++) {
+                
                 $("#main").append('<button class="answer-button" id= "button-'+i+'"data-name="'+questionObject[game.
                 currentQuestion].answers[i]+'">'+questionObject[game.
                 currentQuestion].answers[i]+'</button>');
+
             }
         },
 
@@ -94,37 +105,71 @@ $(document).ready(function() {
         //TimeUp Page Displayed
         timeUp: function () {
             clearInterval(timer); //Stop Timer
+            game.unanswered++;
             $("#main").html('<h2>TIME UP!</h2>');
-            $("#main").append('<h3>Correct Answer Is: ' + questions[game.currentQuestion]. correctAnswer + '</h3>');
+            $("#main").append('<h3>Correct Answer Is: ' + questionObject[game.currentQuestion].correctAnswer + '</h3>');
+            if(game.currentQuestion==questionObject.length-1) {
+                setTimeout(game.gameOver, 3*1000);
+            }else {
+                setTimeout(game.nextQuestion, 3*1000);
+            }
         },
 
         //Game Over Page Displayed
         gameOver: function () {
-            $("#main").html(game.correct);
-            $("#main").append(game.incorrect);
+            clearInterval(timer);
+            $("#main").html("<h2>GAME OVER!</h2>");
+            $("#main").append("<h3>Correct Answers: " + game.correct + "</h3>");
+            $("#main").append("<h3>Incorrect Answers: " + game.incorrect + "</h3>");
+            $("#main").append("<h3>Unanswered Questions: " + game.unanswered + "</h3>")
+            $("#main").append("<button id='newGame'>New Game</button>");
         },
 
-        clicked: function () {
-
+        //Answer Click Event
+        clicked: function (event) {
+            clearInterval (timer);
+            if ($(event.target).data("name")==questionObject[game.currentQuestion].correctAnswer) {
+                game.correctlyAnswered();
+            } else {
+                game.incorrectlyAnswered();
+            }
         },
 
         //Correct Answer
-        correctAnswer: function () {
+        correctlyAnswered: function () {
             console.log("RIGHT!");
             clearInterval(timer); //Stop Timer
             game.correct ++;
+            $("#main").html('<h2>CORRECT!</h2>');
+            if(game.currentQuestion==questionObject.length-1) {
+                setTimeout(game.gameOver, 3*1000);
+            }else {
+                setTimeout(game.nextQuestion, 3*1000);
+            }
         },
 
         //Incorrect Answer
-        incorrectAnswer: function () {
+        incorrectlyAnswered: function () {
             console.log("WRONG");
             clearInterval(timer); //Stop Timer
             game.incorrect ++;
+            $("#main").html('<h2>INCORRECT!</h2>');
+            $("#main").append('<h3>Correct Answer Is: ' + questionObject[game.currentQuestion]. correctAnswer + '</h3>');
+            if(game.currentQuestion==questionObject.length-1) {
+                setTimeout(game.gameOver, 3*1000);
+            }else {
+                setTimeout(game.nextQuestion, 3*1000);
+            }
         },
 
         //Resets Game
         newGame: function () {
-
+            game.currentQuestion = 0;
+            game.counter = 30;
+            game.correct = 0;
+            game.incorrect = 0;
+            game.unanswered = 0;
+            game.loadQuestion();
         },
 
     };
