@@ -10,10 +10,11 @@ $(document).ready(function() {
     $(startButton).on("click", function () {
     console.log("I WORK");
     $(startButton).remove();
+    game.loadQuestion();
     });
 
     //Questions Object
-    var questions = [
+    var questionObject = [
         {
         question: "What year was Terminator 2: Judgment Day released in theaters?",
         answers: [1993, 1995, 1989, 1991],
@@ -55,18 +56,29 @@ $(document).ready(function() {
     //Game Object
 
     var game = {
-        questions: questions,
+        questions: questionObject,
         currentQuestion: 0,
         counter: 30,
         correct: 0,
         incorrect: 0,
 
         timer: function () {
-
+            game.counter --;
+            $("#timer").html(game.counter);
+            if (game.counter <= 0) {
+                console.log("TIME UP!");
+                game.timeUp();
+            }
         },
 
         loadQuestion: function () {
-
+            timer = setInterval(game.timer,1000);
+            $("#question").html('<h2>'+questionObject[game.currentQuestion].question+'</h2>');
+            for(var i = 0; i < questionObject[game.currentQuestion].answers.length; i++){
+                $("#question").append('<button class="answer-button"id="button-'+i+'" data-name="'+questionObject[game.
+                currentQuestion].answers[i]+'">'+questionObject[game.
+                currentQuestion].answers[i]+'</button>');
+            }
         },
 
         nextQuestion: function () {
