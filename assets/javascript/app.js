@@ -27,37 +27,31 @@ $(document).ready(function() {
         question: "What year was Terminator 2: Judgment Day released in theaters?",
         answers: [1993, 1995, 1989, 1991],
         correctAnswer: 1991,
-        image: "./assets/images/correct.gif"
         },
         {
         question: "Who directed Terminator 2: Judgment Day?",
         answers: ["Steven Spielberg", "James Cameron", "Ron Howard", "M. Night Shyamalan"],
         correctAnswer: "James Cameron",
-        image: "./assets/images/correct.gif"
         },
         {
         question: "Who is the future leader of the Resistance?",
         answers: ["John Connor", "James Connor", "James Cameron", "Arnold Schwarzenegger"],
         correctAnswer: "John Connor",
-        image: "./assets/images/correct.gif"
         },
         {
         question: "What model is Arnold Schwarzenegger's Terminator?",
         answers: ["T-1000", "T-800", "T-20", "T-809"],
         correctAnswer: "T-800",
-        image: "./assets/images/correct.gif"
         },
         {
         question: "The Artificial Intelligence that holds control of the United States' nuclear arsenal is called?",
         answers: ["Skynet", "Cyberdyne Systems", "Dyson", "CGI"],
         correctAnswer: "Skynet",
-        image: "./assets/images/correct.gif"
         },
         {
         question: "Arnold Schwarzenegger won which Award at the 1992 MTV Movie Awards?",
         answers: ["Best Villain", "Best Breakthrough Performance", "Best Male Performance", "Best Female Performance"],
         correctAnswer: "Best Male Performance",
-        image: "./assets/images/correct.gif"
         }
     ];
 
@@ -107,6 +101,7 @@ $(document).ready(function() {
             clearInterval(timer); //Stop Timer
             game.unanswered++;
             $("#main").html('<h2>TIME UP!</h2>');
+            $("#main").append('<img id="theImg" src="./assets/images/timeup.gif" "</img>')
             $("#main").append('<h3>Correct Answer Is: ' + questionObject[game.currentQuestion].correctAnswer + '</h3>');
             if(game.currentQuestion==questionObject.length-1) {
                 setTimeout(game.gameOver, 3*1000);
@@ -119,6 +114,7 @@ $(document).ready(function() {
         gameOver: function () {
             clearInterval(timer);
             $("#main").html("<h2>GAME OVER!</h2>");
+            $("#main").append('<img id="theImg" src="./assets/images/gameover.gif" "</img>')
             $("#main").append("<h3>Correct Answers: " + game.correct + "</h3>");
             $("#main").append("<h3>Incorrect Answers: " + game.incorrect + "</h3>");
             $("#main").append("<h3>Unanswered Questions: " + game.unanswered + "</h3>")
@@ -141,6 +137,7 @@ $(document).ready(function() {
             clearInterval(timer); //Stop Timer
             game.correct ++;
             $("#main").html('<h2>CORRECT!</h2>');
+            $("#main").append('<img id="theImg" src="./assets/images/correct.gif" "</img>')
             if(game.currentQuestion==questionObject.length-1) {
                 setTimeout(game.gameOver, 3*1000);
             }else {
@@ -154,6 +151,7 @@ $(document).ready(function() {
             clearInterval(timer); //Stop Timer
             game.incorrect ++;
             $("#main").html('<h2>INCORRECT!</h2>');
+            $("#main").append('<img id="theImg" src="./assets/images/wrong.gif" "</img>')
             $("#main").append('<h3>Correct Answer Is: ' + questionObject[game.currentQuestion]. correctAnswer + '</h3>');
             if(game.currentQuestion==questionObject.length-1) {
                 setTimeout(game.gameOver, 3*1000);
