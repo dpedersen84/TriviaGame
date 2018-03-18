@@ -1,12 +1,13 @@
 $(document).ready(function() {
 
 
-    //start button
+    //Start Button Loaded On Page
     var startButton = $("<button>");
     startButton.addClass("button button-color")
     startButton.text("START");
     $("#main").append(startButton);
 
+    //Click Function for Start Button
     $(startButton).on("click", function () {
     console.log("I WORK");
     $(startButton).remove();
@@ -54,7 +55,6 @@ $(document).ready(function() {
     ];
 
     //Game Object
-
     var game = {
         questions: questionObject,
         currentQuestion: 0,
@@ -62,6 +62,7 @@ $(document).ready(function() {
         correct: 0,
         incorrect: 0,
 
+        //Timer
         timer: function () {
             game.counter --;
             $("#timer").html(game.counter);
@@ -71,58 +72,61 @@ $(document).ready(function() {
             }
         },
 
+        //Load Question On Page
         loadQuestion: function () {
             timer = setInterval(game.timer,1000);
-            $("#question").html('<h2>'+questionObject[game.currentQuestion].question+'</h2>');
+            $("#main").html('<h2>'+questionObject[game.currentQuestion].question+'</h2>');
             for(var i = 0; i < questionObject[game.currentQuestion].answers.length; i++){
-                $("#question").append('<button class="answer-button"id="button-'+i+'" data-name="'+questionObject[game.
+                $("#main").append('<button class="answer-button" id= "button-'+i+'"data-name="'+questionObject[game.
                 currentQuestion].answers[i]+'">'+questionObject[game.
                 currentQuestion].answers[i]+'</button>');
             }
         },
 
+        //Next Question Loads On Page
         nextQuestion: function () {
-
+            game.counter = 30;
+            $("#timer").html(game.counter);
+            game.currentQuestion ++
+            game.loadQuestion ();
         },
 
+        //TimeUp Page Displayed
         timeUp: function () {
-
+            clearInterval(timer); //Stop Timer
+            $("#main").html('<h2>TIME UP!</h2>');
+            $("#main").append('<h3>Correct Answer Is: ' + questions[game.currentQuestion]. correctAnswer + '</h3>');
         },
 
+        //Game Over Page Displayed
         gameOver: function () {
-
+            $("#main").html(game.correct);
+            $("#main").append(game.incorrect);
         },
 
         clicked: function () {
 
         },
 
-        correctAnswers: function () {
-
+        //Correct Answer
+        correctAnswer: function () {
+            console.log("RIGHT!");
+            clearInterval(timer); //Stop Timer
+            game.correct ++;
         },
 
-        incorrectAnswers: function () {
-
+        //Incorrect Answer
+        incorrectAnswer: function () {
+            console.log("WRONG");
+            clearInterval(timer); //Stop Timer
+            game.incorrect ++;
         },
 
+        //Resets Game
         newGame: function () {
 
         },
 
     };
-
-//1 question at a time
-    //30 second timer per question
-    //multiple choice
-        //highlights question selected
-        //incorrect or correct page / time out page with video? image?
-            //moves to next question in 3-5 seconds
-
-
-//game over screen
-    //correct / incorrect total
-    //new game button
-        //no need to refresh page
-
 
 })//END
