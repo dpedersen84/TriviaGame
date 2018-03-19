@@ -67,7 +67,7 @@ $(document).ready(function() {
         //Timer
         timer: function () {
             game.counter --;
-            $("#timer").html(game.counter);
+            $("#timer").html('<h2>Time: ' + game.counter + ' Seconds</h2>');
             if (game.counter <= 0) {
                 console.log("TIME UP!");
                 game.timeUp();
@@ -77,6 +77,7 @@ $(document).ready(function() {
         //Load Question On Page
         loadQuestion: function () {
             timer = setInterval(game.timer,1000);
+            $("#timer").html("<h2>Time: <span id='counter'> 30 </span> Seconds</h2>");
             $("#main").html('<h2>'+questionObject[game.currentQuestion].question+'</h2>');
             
             for(var i = 0; i < questionObject[game.currentQuestion].answers.length; i++) {
@@ -91,7 +92,7 @@ $(document).ready(function() {
         //Next Question Loads On Page
         nextQuestion: function () {
             game.counter = 30;
-            $("#timer").html(game.counter);
+            $("#timer").html('<h2>' + game.counter + '</h2>');
             game.currentQuestion ++
             game.loadQuestion ();
         },
